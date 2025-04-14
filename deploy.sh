@@ -2,9 +2,8 @@
 
 # Включаем вывод команд и прерывание при ошибках
 set -e
-echo "Начало депло11111111111я..."
 # Переходим в директорию проекта
-PROJECT_DIR="/opt/star_burger_dockerization"
+PROJECT_DIR="/opt/star_burger_dockerizations"
 cd $PROJECT_DIR
 
 echo "Начало деплоя..."

@@ -52,9 +52,10 @@ cd star_burger_dockerization
 
 ### 2. Запуск в production режиме
 ```bash
+# Сделать файл deploy.sh исполняемым
+chmod +x deploy.sh
 # Запуск автодеплоя
 ./deploy.sh
-```
 
 ### 3. Первоначальная настройка
 ```bash
