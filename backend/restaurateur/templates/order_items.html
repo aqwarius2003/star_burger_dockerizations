@@ -1,0 +1,87 @@
+{% extends 'base_restaurateur_page.html' %}
+
+{% block title %}Необработанные заказы | Star Burger{% endblock %}
+
+{% block content %}
+  <center>
+    <h2>Необработанные заказы</h2>
+  </center>
+
+  <hr/>
+  <br/>
+  <br/>
+  <div class="container">
+   <table class="table table-responsive">
+    <tr>
+      <th>ID заказа</th>
+      <th>Статус</th>
+      <th>Способ оплаты</th>
+      <th>Стоимоcть заказа</th>
+      <th>Клиент</th>
+      <th>Телефон</th>
+      <th>Адрес доставки</th>
+      <th>Ресторан</th>
+      <th>Комментарий</th>
+      <th>Ссылка на админку</th>
+    </tr>
+
+    {% for order in orders %}
+      {% if order.status not in excluded_statuses %}
+        <tr>
+          <td>{{ order.id }}</td>
+          <th>{{ order.get_status_display }}</th>
+          <th>{{ order.get_payment_method_display}}</th>
+          <td>{{ order.total_price }}</td>
+          <td>{{ order.firstname }} {{ order.lastname }}</td>
+          <td>{{ order.phonenumber }}</td>
+          <td>{{ order.address }}</td>
+          <td>
+    {% if order.restaurant %}
+        Готовит {{ order.restaurant.name }}
+    {% else %}
+        {% for order_id, restaurant_distances in available_restaurants_data %}
+            {% if order_id == order.id %}
+                {% if restaurant_distances %}
+                    {% if restaurant_distances|length > 1 %}
+                        <details>
+                            <summary>Можно приготовить в ▼▼▼ </summary>
+                            <ul>
+                                {% for restaurant in restaurant_distances %}
+                                    <li>{{ restaurant.name }} - {{ restaurant.distance }} км</li>
+                                {% endfor %}
+                            </ul>
+                        </details>
+                    {% else %}
+                        Может приготовить {{ restaurant_distances.0.name }}
+                    {% endif %}
+                {% else %}
+                    Координаты не определены
+                    Нет ресторанов
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+          </td>
+
+          <td>{{ order.comments }}</td>
+          <td>
+            <a href="{%url 'admin:foodcartapp_order_change' order.id %}?next={{ request.path | urlencode }}">
+              Редактировать
+            </a>
+          </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+
+         {% for item in order_items %}
+      <tr>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+    {% endfor %}
+   </table>
+  </div>
+{% endblock %}
