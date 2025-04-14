@@ -4,8 +4,8 @@ FROM python:3.11-slim
 WORKDIR /opt/star-burger
 
 # Переменные среды для Python
-ENV PYTHONDONTWRITEBYTECODE=1  # Предотвращает создание .pyc файлов
-ENV PYTHONUNBUFFERED=1         # Предотвращает буферизацию stdout/stderr
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 # Установка системных зависимостей
 RUN apt-get update && apt-get install -y \
