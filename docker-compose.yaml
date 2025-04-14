@@ -43,7 +43,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    command: bash -c "python manage.py migrate && gunicorn --workers 3 --bind 0.0.0.0:8000 star_burger.wsgi:application"
+    command: bash -c "python manage.py collectstatic --no-input && python manage.py migrate && gunicorn --workers 3 --bind 0.0.0.0:8000 star_burger.wsgi:application"
     restart: always
 
 volumes:

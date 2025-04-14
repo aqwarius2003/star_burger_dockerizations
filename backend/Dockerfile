@@ -27,9 +27,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Копирование кода проекта
 COPY . .
 
-# Сборка статики при сборке образа
-RUN python manage.py collectstatic --no-input
-
 EXPOSE 8000
 
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "star_burger.wsgi:application"]
