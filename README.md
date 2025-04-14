@@ -46,8 +46,8 @@ ROLLBAR_LOCAL_USERNAME=your_username
 
 ### 1. Клонирование репозитория
 ```bash
-git clone https://github.com/aqwarius2003/star_burger_dockerization.git
-cd star_burger_dockerization
+git clone https://github.com/aqwarius2003/star_burger_dockerizations.git
+cd star_burger_dockerizations
 ```
 
 ### 2. Запуск в production режиме
